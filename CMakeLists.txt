@@ -7,6 +7,7 @@ ADD_DEFINITIONS(
   -w
   -lpthread
   -Ofast
+  -lncurses
   )
 
 set(EXECUTABLE_OUTPUT_PATH bin/${CMAKE_BUILD_TYPE})
@@ -28,4 +29,4 @@ add_executable(
   ${source_files}
 
   )
-target_link_libraries(ml -lpthread -lX11)
+target_link_libraries(ml -lpthread -lX11 -lncurses)
