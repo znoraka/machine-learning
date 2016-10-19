@@ -4,7 +4,7 @@ class Bird {
 private:
   float x;
 
-  float gravity = 2.0f;
+  float gravity = 1.0f;
 
   float upspeed = 0;
 
@@ -118,7 +118,7 @@ void Bird::jump() {
 
 void Bird::update() {
   if(alive) {
-    y += gravity + ((upspeed < 0) ? -3 : 0);
+    y += gravity + ((upspeed < 0) ? -2 : 0);
 
     if(upspeed <= 0) 
       upspeed += slowDown;
