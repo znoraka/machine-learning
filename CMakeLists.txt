@@ -29,4 +29,4 @@ add_executable(
   ${source_files}
 
   )
-target_link_libraries(ml -lpthread -lX11 -lncurses)
+target_link_libraries(ml -lpthread -lncurses)
