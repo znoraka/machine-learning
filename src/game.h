@@ -8,7 +8,7 @@ private:
 
   float upspeed = 0;
 
-  float slowDown = 0.5f;
+  float slowDown = 1.0f;
 
   Network *network;
   

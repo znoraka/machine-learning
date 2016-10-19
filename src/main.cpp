@@ -14,7 +14,7 @@
 int main(int argc, char **argv) {
   std::srand(std::time(0));
 
-  std::vector<int> dimensions{2, 8, 1};
+  std::vector<int> dimensions{2, 4, 1};
   std::vector<Network*> networks;
 
   for (int i = 0; i < 50; i++) {
@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
     refresh();
     game->update();
     refresh();
-    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    std::this_thread::sleep_for(std::chrono::milliseconds(5));
     clear();
   }
 
