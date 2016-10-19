@@ -125,7 +125,7 @@ void Bird::update() {
   
     score++;
 
-    if(game->getPipe1()->getX() <= 2 && (y > game->getPipe1()->getYBot() || y < game->getPipe1()->getYTop())) {
+    if(game->getPipe1()->getX() <= 2 && game->getPipe1()->getX() > -1 && (y > game->getPipe1()->getYBot() || y < game->getPipe1()->getYTop())) {
       this->alive = false;
       game->aliveBirds--;
     }
@@ -161,7 +161,7 @@ void Game::update() {
   pipe1->draw();
   pipe2->draw();
 
-  if(pipe1->getX() <= -2) {
+  if(pipe1->getX() <= -5) {
     Pipe *tmp = pipe1;
     pipe1 = pipe2;
     pipe2 = tmp;
@@ -197,7 +197,7 @@ void Game::update() {
     for (int i = 0; i < birds.size(); i++) {
       birds[i]->score = 0;
       if(i != index) {
-	birds[i]->setNetwork(birds[i]->getNetwork());
+	birds[i]->getNetwork()->copyNetworkValues(birds[i]->getNetwork());
 	birds[i]->getNetwork()->mutate(0.05f);
       }
     }
