@@ -48,6 +48,7 @@ private:
   Pipe *pipe1, *pipe2;  
 public:
   int bestScore = 0;
+  int score = 0;
   void update();
   Game();
 
@@ -73,7 +74,7 @@ Pipe::Pipe(float x, float yTop) {
 void Pipe::init(float x, float yTop) {
   this->x = x;
   this->yTop = yTop;
-  this->yBot = yTop + 6;
+  this->yBot = yTop + 4;
 }
 
 void Bird::draw() {
@@ -155,6 +156,7 @@ Pipe *Game::getPipe2() {
 }
 
 void Game::update() {
+  score++;
   pipe1->update();
   pipe2->update();
 
@@ -165,7 +167,7 @@ void Game::update() {
     Pipe *tmp = pipe1;
     pipe1 = pipe2;
     pipe2 = tmp;
-    pipe2->init(pipe1->getX() + 40, std::rand() % 10 + 5);
+    pipe2->init(pipe1->getX() + 40, std::rand() % 20 + 2);
   }
 
   for(auto i : birds) {
@@ -175,9 +177,10 @@ void Game::update() {
   }
 
   if(aliveBirds == 0) {
+    score = 0;
     generation++;
-    pipe1->init(55, std::rand() % 10 + 5);
-    pipe2->init(95, std::rand() % 10 + 5);
+    pipe1->init(55, std::rand() % 20 + 2);
+    pipe2->init(95, std::rand() % 20 + 2);
     aliveBirds = 50;
     int bestScore = 0;
     int index = 0;		  
@@ -197,13 +200,13 @@ void Game::update() {
     for (int i = 0; i < birds.size(); i++) {
       birds[i]->score = 0;
       if(i != index) {
-	birds[i]->getNetwork()->copyNetworkValues(birds[i]->getNetwork());
-	birds[i]->getNetwork()->mutate(0.05f);
+	birds[i]->getNetwork()->copyNetworkValues(birds[index]->getNetwork());
+	birds[i]->getNetwork()->mutate(0.005f);
       }
     }
   }
 
-  mvprintw(0, 0, "bestScore = %d", this->bestScore);
+  mvprintw(0, 0, "score = %d", score);
   mvprintw(1, 0, "alive = %d", aliveBirds);
   mvprintw(2, 0, "generation = %d", generation);
 }
