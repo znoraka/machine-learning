@@ -74,7 +74,7 @@ Pipe::Pipe(float x, float yTop) {
 void Pipe::init(float x, float yTop) {
   this->x = x;
   this->yTop = yTop;
-  this->yBot = yTop + 4;
+  this->yBot = yTop + 3;
 }
 
 void Bird::draw() {
@@ -201,7 +201,11 @@ void Game::update() {
       birds[i]->score = 0;
       if(i != index) {
 	birds[i]->getNetwork()->copyNetworkValues(birds[index]->getNetwork());
-	birds[i]->getNetwork()->mutate(0.005f);
+	if(i % 5 == 0) {
+	  birds[i]->getNetwork()->mutate(0.5f);
+	} else {
+	  birds[i]->getNetwork()->mutate(0.005f);
+	}
       }
     }
   }
